@@ -1,0 +1,75 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: white;
+  text-align: center;
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: #222;
+  box-shadow: 0px 0px 10px rgba(0, 255, 255, 0.5);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+nav h1 {
+  color: cyan;
+  text-shadow: 0px 0px 8px cyan;
+}
+
+button {
+  background: cyan;
+  border: none;
+  padding: 10px 15px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: rgb(0, 200, 200);
+}
+
+.container {
+  margin-top: 80px;
+  padding: 20px;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  width: 250px;
+  border-radius: 5px;
+}
+
+#movie-details img {
+  width: 200px;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+#favorites-list,
+#history-list {
+  list-style: none;
+  padding: 0;
+}
+
+#favorites-list li,
+#history-list li {
+  padding: 8px;
+  background: #222;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}

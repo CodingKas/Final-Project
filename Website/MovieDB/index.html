@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Lookup</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav>
+      <h1>🎬 Movie Lookup</h1>
+      <div>
+        <button onclick="showSearch()">Search</button>
+        <button onclick="showHistory()">History</button>
+      </div>
+    </nav>
+
+    <div id="search-section" class="container">
+      <input type="text" id="movie-input" placeholder="Enter movie title..." />
+      <button onclick="searchMovie()">🔍 Search</button>
+      <button id="toggle-favorites" onclick="toggleFavorites()">
+        ⭐ Show Favorites
+      </button>
+
+      <div id="movie-details"></div>
+      <div id="favorites-list" class="hidden"></div>
+    </div>
+
+    <div id="history-section" class="container hidden">
+      <h2>Search History</h2>
+      <ul id="history-list"></ul>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

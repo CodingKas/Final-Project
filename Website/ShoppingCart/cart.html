@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Cart – Luxury Jewels</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav>
+      <h1>💎 Luxury Jewels</h1>
+      <a href="index.html">← Continue Shopping</a>
+    </nav>
+
+    <main>
+      <section class="cart-section">
+        <h2>Your Cart</h2>
+
+        <!-- ✅ Cart Items Container -->
+        <div id="cart-items" class="cart-list"></div>
+
+        <!-- ✅ Total and Checkout -->
+        <div class="cart-summary">
+          <p><strong>Total:</strong> $<span id="cart-total">0.00</span></p>
+          <button id="checkout-btn">Checkout</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <p>© 2025 Luxury Jewels · Timeless Elegance</p>
+        <p>
+          Contact:
+          <a href="mailto:support@luxuryjewels.com">support@luxuryjewels.com</a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // ✅ Load and display the cart
+      document.addEventListener("DOMContentLoaded", () => {
+        renderCart();
+      });
+
+      function renderCart() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const container = document.getElementById("cart-items");
+        const totalEl = document.getElementById("cart-total");
+
+        container.innerHTML = "";
+        let total = 0;
+
+        if (cart.length === 0) {
+          container.innerHTML = "<p>Your cart is empty.</p>";
+          totalEl.textContent = "0.00";
+          return;
+        }
+
+        cart.forEach((item, index) => {
+          const div = document.createElement("div");
+          div.className = "cart-item";
+          div.innerHTML = `
+          <img src="${item.img}" alt="${
+            item.name
+          }" style="width:100px; border-radius: 8px;" />
+          <div class="details">
+            <h3>${item.name}</h3>
+            <p>$${item.price.toFixed(2)} × ${item.quantity}</p>
+            <button onclick="changeQuantity(${index}, 1)">+</button>
+            <button onclick="changeQuantity(${index}, -1)">−</button>
+            <button onclick="removeItem(${index})">Remove</button>
+          </div>
+        `;
+          container.appendChild(div);
+          total += item.price * item.quantity;
+        });
+
+        totalEl.textContent = total.toFixed(2);
+      }
+
+      function changeQuantity(index, delta) {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart[index].quantity += delta;
+
+        if (cart[index].quantity <= 0) cart.splice(index, 1);
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+      }
+
+      function removeItem(index) {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCart();
+      }
+
+      document.getElementById("checkout-btn").onclick = () => {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const total = cart.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        );
+
+        if (!cart.length) {
+          alert("Your cart is empty!");
+          return;
+        }
+
+        alert(`🎉 Thank you for your purchase!\nTotal: $${total.toFixed(2)}`);
+        localStorage.removeItem("cart");
+        renderCart();
+      };
+    </script>
+  </body>
+</html>
